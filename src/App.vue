@@ -1,26 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HeaderSection @sideBarButtonClick="toggleSideBarButton($event)" />
+  <div class="main-content" :class="{ 'sidebar-open': isOpen }">
+    <SidebarSection :toggleClass="toggleClass" />
+    <router-view />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HeaderSection from "./layouts/HeaderSection.vue";
+import SidebarSection from "./layouts/SidebarSection.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HeaderSection,
+    SidebarSection,
+  },
+  data() {
+    return { isOpen: false, toggleClass: "", neededData: null };
+  },
+  methods: {
+    toggleSideBarButton(event) {
+      this.isOpen = event;
+      if (event) {
+        this.toggleClass = "open";
+      } else {
+        this.toggleClass = "";
+      }
+      this.setOverlay();
+    },
+    setOverlay() {
+      if (this.neededData) {
+        if (this.isOpen) {
+          this.neededData.classList.add(this.toggleClass);
+        } else if (this.neededData.classList.contains("open")) {
+          this.neededData.classList.remove("open");
+        }
+      }
+    },
+  },
+  beforeMount() {
+    this.neededData = document.getElementById("sidebarOverlay");
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
