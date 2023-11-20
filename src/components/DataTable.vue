@@ -209,7 +209,11 @@
                 </td>
                 <td>
                   <div class="action-buttons">
-                    <button type="button" class="btn btn-sm-gray">
+                    <button
+                      type="button"
+                      class="btn btn-sm-gray"
+                      v-b-tooltip="'Pause'"
+                    >
                       <svg
                         width="18"
                         height="18"
@@ -236,7 +240,11 @@
                         />
                       </svg>
                     </button>
-                    <button type="button" class="btn btn-sm-gray">
+                    <button
+                      type="button"
+                      class="btn btn-sm-gray"
+                      v-b-tooltip="'Edit'"
+                    >
                       <svg
                         width="18"
                         height="18"
@@ -252,7 +260,11 @@
                         />
                       </svg>
                     </button>
-                    <button type="button" class="btn btn-sm-gray">
+                    <button
+                      type="button"
+                      class="btn btn-sm-gray"
+                      v-b-tooltip="'More options'"
+                    >
                       <svg
                         width="18"
                         height="18"
@@ -324,11 +336,19 @@ function valueFormatter(val, decimals = 1) {
 .action-buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 .cstm-table table thead {
   background-color: #e9ebf9;
+}
+
+.tooltip-inner {
+  background-color: var(--secondarypurple) !important;
+}
+
+.bs-tooltip-top .tooltip-arrow::before,
+.bs-tooltip-auto[x-placement^="top"] .arrow::before {
+  border-top-color: var(--secondarypurple) !important;
 }
 </style>

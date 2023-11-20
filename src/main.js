@@ -1,7 +1,10 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import BootstrapVueNext from "bootstrap-vue-next";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
 import "bootstrap";
 import "../public/main.css";
 
@@ -36,6 +39,11 @@ library.add(
   faCircleExclamation,
   faBan
 );
+
 const app = createApp(App);
 
-app.use(router).component("font-awesome-icon", FontAwesomeIcon).mount("#app");
+app
+  .use(router)
+  .use(BootstrapVueNext)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");
